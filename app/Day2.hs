@@ -1,8 +1,22 @@
 module Day2 where
 
-fuel :: Integer -> Integer
-fuel n = case n of
-    0 -> 0
-    n -> let m = max 0 (div n 3 - 2) in m + fuel m
+import Data.List.Split (splitOn)
+import qualified Data.Map as Map
 
-day2 = show . sum . map (fuel . read) . lines
+run :: Map.Map Integer Integer -> Integer -> Map.Map Integer Integer
+run ns ip = case ns Map.! ip of
+    1 -> let
+            px = (ns Map.! (ip + 1))
+            py = (ns Map.! (ip + 2))
+            pz = (ns Map.! (ip + 3))
+            ns' = Map.insert pz ((ns Map.! px) + (ns Map.! py)) ns
+         in run ns' (ip + 4)
+    2 -> let
+            px = (ns Map.! (ip + 1))
+            py = (ns Map.! (ip + 2))
+            pz = (ns Map.! (ip + 3))
+            ns' = Map.insert pz ((ns Map.! px) * (ns Map.! py)) ns
+        in run ns' (ip + 4)
+    99 -> ns
+
+day2 contents = show $ run (Map.fromList $ zip [0..] $ map read $ splitOn "," contents) 0
