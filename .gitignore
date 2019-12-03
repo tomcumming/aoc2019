@@ -1,0 +1,5 @@
+.stack-work/
+aoc19.cabal
+*~
+/input
+stack.yaml.lock
