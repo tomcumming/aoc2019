@@ -11,6 +11,7 @@ import Day4 (day4)
 import Day4b (day4b)
 import Day6 (day6)
 import Day8 (day8)
+import Day8b (day8b)
 
 main :: IO ()
 main = do
@@ -26,5 +27,6 @@ main = do
                     ["4b"] -> day4b contents
                     ["6"] -> day6 contents
                     ["8"] -> day8 (25 * 6) contents
+                    ["8b"] -> day8b 25 6 contents
                     _ -> "Specify a day"
     putStrLn result
